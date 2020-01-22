@@ -1,2 +1,6 @@
+[![Build Status](https://travis-ci.org/Samourai-Wallet/java-server.svg?branch=develop)](https://travis-ci.org/Samourai-Wallet/java-server)
+[![](https://jitpack.io/v/Samourai-Wallet/java-server.svg)](https://jitpack.io/#Samourai-Wallet/java-server)
+
 # java-server
-server code shared by whirlpool-server and xmanager-server
+
+Codebase for java servers.
