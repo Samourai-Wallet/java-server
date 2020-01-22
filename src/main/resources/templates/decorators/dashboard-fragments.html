@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<a th:fragment="logo" class="navbar-brand col-sm-3 col-md-2 mr-0" href="/" title="Samourai Java-Server"><img src="/img/samourai.png"/> Java-Server</a>
+
+<ul th:fragment="menu" class="nav flex-column">
+    <li class="nav-item">
+        <a th:class="${currentPage == 'item1'} ? 'nav-link active' : 'nav-link'" href="/item1">
+            <span data-feather="play"></span>
+            Item 1
+        </a>
+    </li>
+    <li class="nav-item">
+        <a th:class="${currentPage == 'item2'} ? 'nav-link active' : 'nav-link'" href="/item2">
+            <span data-feather="list"></span>
+            Item 2
+        </a>
+    </li>
+</ul>
+
+<span th:fragment="copyright">&copy; Samourai Wallet</span>
+
+</body>
+</html>
