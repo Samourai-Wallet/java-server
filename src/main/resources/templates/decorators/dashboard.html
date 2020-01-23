@@ -25,6 +25,10 @@
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul th:replace="decorators/dashboard-fragments :: menu" />
+                    <br/>
+                    <div class="text-center text-muted">
+                        <small><span th:text="${#dates.format(dashboardModel.now, 'dd-MMM-yyyy HH:mm:ss')}"/></small>
+                    </div>
                 </div>
             </nav>
 
