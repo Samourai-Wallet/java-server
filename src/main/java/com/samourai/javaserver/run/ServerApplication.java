@@ -27,8 +27,6 @@ public abstract class ServerApplication implements ApplicationRunner {
     SpringApplication.run(ServerApplication.class, args);
   }
 
-  protected abstract String getServerName();
-
   protected abstract void setLoggerDebug();
 
   protected abstract ServerConfig getServerConfig();
@@ -48,15 +46,15 @@ public abstract class ServerApplication implements ApplicationRunner {
     try {
       serverConfig.validate();
     } catch (Exception e) {
-      System.err.println("ERROR: invalid server configuration: " + e.getMessage());
+      log.error("Invalid server configuration", e);
       exit();
       return;
     }
 
-    String serverName = getServerName();
-    log.info("------------ " + serverName + " ------------");
+    log.info("------------ " + serverConfig.getName() + " ------------");
     log.info(
-        "Running " + serverName + " {} on java {}",
+        "Running {} {} on java {}",
+        serverConfig.getName(),
         Arrays.toString(args.getSourceArgs()),
         System.getProperty("java.version"));
     for (Map.Entry<String, String> entry : serverConfig.getConfigInfo().entrySet()) {
@@ -68,7 +66,7 @@ public abstract class ServerApplication implements ApplicationRunner {
     try {
       runServer();
     } catch (Exception e) {
-      log.error(serverName + " startup failed", e);
+      log.error("Server startup failed", e);
       exit();
       return;
     }
