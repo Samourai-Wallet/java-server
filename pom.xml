@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.Samourai-Wallet</groupId>
 	<artifactId>java-server</artifactId>
-	<version>1.0.0</version>
+	<version>develop-SNAPSHOT</version>
 	<name>java-server</name>
 	<properties>
 		<project.scm.id>samourai</project.scm.id>
@@ -153,6 +153,6 @@
 	</repositories>
 	<scm>
 		<connection>scm:git:https://github.com/Samourai-Wallet/java-server.git</connection>
-		<tag>1.0.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 </project>
