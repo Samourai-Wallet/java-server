@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{decorators/dashboard}"
+      th:with="currentPage = 'system'">
+<head>
+    <title>System</title>
+    <link rel="stylesheet" href="/css/config.css" />
+</head>
+<body>
+    <div layout:fragment="main">
+        <h1 class="h2">System</h1>
+
+        <div>Mem use: <strong th:text="${memUsed}M"/>/<span th:text="${memTotal}M"/></div>
+        <div><strong th:text="${threads.size()}"/> threads running.</div>
+        <div class="table-responsive">
+            <table class="table table-sm system">
+                <thead>
+                <tr>
+                    <th scope="col">Thread</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="thread : ${threads}">
+                    <td class="threadName"><span th:text="${thread.getName()}"/></td>
+                    <td class="threadState"><span th:text="${thread.getState()}"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

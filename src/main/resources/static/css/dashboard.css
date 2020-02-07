@@ -18,3 +18,6 @@
 .container-fluid a:hover {
     color: #b71c1c;
 }
+.table-sm {
+    font-size: 0.8em;
+}
