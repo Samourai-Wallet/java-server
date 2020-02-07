@@ -29,9 +29,10 @@ public class SystemTemplateModel extends DashboardTemplateModel {
 
     // memory
     Runtime rt = Runtime.getRuntime();
-    memTotal = rt.totalMemory();
+    long total = rt.totalMemory();
     long free = rt.freeMemory();
-    memUsed = memTotal - free;
+    memUsed = bytesToMB(total - free);
+    memTotal = bytesToMB(total);
   }
 
   public void apply(Model model) {
@@ -39,5 +40,9 @@ public class SystemTemplateModel extends DashboardTemplateModel {
     model.addAttribute("threads", threads);
     model.addAttribute("memUsed", memUsed);
     model.addAttribute("memTotal", memTotal);
+  }
+
+  private static long bytesToMB(long bytes) {
+    return Math.round(bytes / (1024L * 1024L));
   }
 }
