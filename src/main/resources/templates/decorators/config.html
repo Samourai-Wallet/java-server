@@ -13,7 +13,7 @@
         <h1 class="h2">Configuration</h1>
 
         <div class="table-responsive">
-        <table class="table table-sm history">
+        <table class="table table-sm config">
             <thead>
             <tr>
                 <th scope="col">Key</th>
@@ -23,7 +23,7 @@
             <tbody>
                 <tr th:each="entry : *{configInfo}">
                     <td class="configInfoKey"><span th:text="${entry.key}"/></td>
-                    <td class="configInfoValue"><pre><code th:text="${entry.value}"/></pre></td>
+                    <td class="configInfoValue"><small th:text="${entry.value}"/></td>
                 </tr>
             </tbody>
         </table>
