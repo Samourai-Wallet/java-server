@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="entry : *{configInfo}">
+                <tr th:each="entry : *{configModel.configInfo}">
                     <td class="configInfoKey"><span th:text="${entry.key}"/></td>
                     <td class="configInfoValue"><small th:text="${entry.value}"/></td>
                 </tr>

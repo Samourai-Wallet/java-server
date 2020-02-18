@@ -13,6 +13,6 @@ public class ConfigTemplateModel extends DashboardTemplateModel {
 
   public void apply(Model model) {
     super.apply(model);
-    model.addAttribute("configInfo", configInfo);
+    model.addAttribute("configModel", this);
   }
 }

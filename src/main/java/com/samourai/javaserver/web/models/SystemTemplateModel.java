@@ -7,8 +7,9 @@ import org.springframework.ui.Model;
 
 public class SystemTemplateModel extends DashboardTemplateModel {
   public Collection<Thread> threads;
-  private long memUsed;
-  private long memTotal;
+  public long memUsed;
+  public long memTotal;
+  public long startupTime;
 
   public SystemTemplateModel(String pageTitle, String logoTitle) {
     super(pageTitle, logoTitle);
@@ -21,7 +22,7 @@ public class SystemTemplateModel extends DashboardTemplateModel {
             .filter(t -> t.getThreadGroup() == tg)
             .sorted(Comparator.comparing(o -> o.getName().toLowerCase()))
             .collect(Collectors.toList());
-    if (false) {
+    if (false) { // template usage
       Thread t = threads.iterator().next();
       t.getName();
       t.getState();
@@ -35,11 +36,13 @@ public class SystemTemplateModel extends DashboardTemplateModel {
     memTotal = bytesToMB(total);
   }
 
+  public void setStartupTime(long startupTime) {
+    this.startupTime = startupTime;
+  }
+
   public void apply(Model model) {
     super.apply(model);
-    model.addAttribute("threads", threads);
-    model.addAttribute("memUsed", memUsed);
-    model.addAttribute("memTotal", memTotal);
+    model.addAttribute("systemModel", this);
   }
 
   private static long bytesToMB(long bytes) {

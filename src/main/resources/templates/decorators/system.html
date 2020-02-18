@@ -6,23 +6,26 @@
       th:with="currentPage = 'system'">
 <head>
     <title>System</title>
-    <link rel="stylesheet" href="/css/config.css" />
+    <link rel="stylesheet" href="/css/system.css" />
 </head>
 <body>
     <div layout:fragment="main">
         <h1 class="h2">System</h1>
 
-        <div>Mem use: <strong th:text="${memUsed}"/>M/<span th:text="${memTotal}"/>M, <strong th:text="${threads.size()}"/> threads running.</div>
+        <div>Startup: <strong><span th:text="${#dates.format(systemModel.startupTime, 'dd-MMM-yyyy HH:mm:ss')}"/></strong></div>
+        <div>Mem use: <strong><span th:text="${systemModel.memUsed}"/>M</strong>/<span th:text="${systemModel.memTotal}"/>M, <strong th:text="${systemModel.threads.size()}"/> threads running.</div>
         <div class="table-responsive">
             <table class="table table-sm system">
                 <thead>
                 <tr>
+                    <th scope="col"></th>
                     <th scope="col">Thread</th>
                     <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="thread : ${threads}">
+                <tr th:each="thread,iter : ${systemModel.threads}">
+                    <td class="threadIndex"><span th:text="${iter.index+1}"/></td>
                     <td class="threadName"><span th:text="${thread.getName()}"/></td>
                     <td class="threadState"><span th:text="${thread.getState()}"/></td>
                 </tr>
