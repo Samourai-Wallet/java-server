@@ -35,8 +35,10 @@
                     <td class="threadName"><span th:text="${thread.getName()}"/></td>
                     <td class="threadState"><span th:text="${thread.getState()}"/></td>
                     <td class="threadStacktrace">
-                        <div th:each="line : ${thread.getStackTrace()}">
-                            <div th:text="${line.toString()}"/>
+                        <div th:if="${thread.getState().name() == 'BLOCKED'}">
+                            <div th:each="line : ${thread.getStackTrace()}">
+                                <span th:text="${line.toString()}"/>
+                            </div>
                         </div>
                     </td>
                 </tr>
