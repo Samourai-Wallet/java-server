@@ -1,6 +1,10 @@
 package com.samourai.javaserver.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.lang.invoke.MethodHandles;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
@@ -10,6 +14,8 @@ public class ServerUtils {
 
   public static final String PROFILE_TEST = "test";
   public static final String PROFILE_DEFAULT = "default";
+
+  private static final ObjectMapper objectMapper = new ObjectMapper();
 
   private static ServerUtils instance;
 
@@ -29,5 +35,33 @@ public class ServerUtils {
       return str;
     }
     return str.substring(0, offset) + "***" + str.substring(str.length() - offset, str.length());
+  }
+
+  public String toJsonString(Object o) {
+    try {
+      return objectMapper.writeValueAsString(o);
+    } catch (Exception e) {
+      log.error("", e);
+    }
+    return null;
+  }
+
+  public Collection<Thread> getThreads() {
+    ThreadGroup tg = Thread.currentThread().getThreadGroup();
+    Collection<Thread> threads =
+        Thread.getAllStackTraces()
+            .keySet()
+            .stream()
+            .filter(
+                (t) -> {
+                  return t.getThreadGroup() == tg;
+                })
+            .sorted(
+                Comparator.comparing(
+                    (o) -> {
+                      return o.getName().toLowerCase();
+                    }))
+            .collect(Collectors.toList());
+    return threads;
   }
 }

@@ -1,8 +1,8 @@
 package com.samourai.javaserver.web.models;
 
+import com.samourai.javaserver.utils.ServerUtils;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.Map;
 import org.springframework.ui.Model;
 
 public class SystemTemplateModel extends DashboardTemplateModel {
@@ -10,18 +10,12 @@ public class SystemTemplateModel extends DashboardTemplateModel {
   public long memUsed;
   public long memTotal;
   public long startupTime;
+  public Map<String, String> metrics;
 
-  public SystemTemplateModel(String pageTitle, String logoTitle) {
+  public SystemTemplateModel(String pageTitle, String logoTitle, Map<String, String> metrics) {
     super(pageTitle, logoTitle);
 
-    ThreadGroup tg = Thread.currentThread().getThreadGroup();
-    this.threads =
-        Thread.getAllStackTraces()
-            .keySet()
-            .stream()
-            .filter(t -> t.getThreadGroup() == tg)
-            .sorted(Comparator.comparing(o -> o.getName().toLowerCase()))
-            .collect(Collectors.toList());
+    this.threads = ServerUtils.getInstance().getThreads();
     if (false) { // template usage
       Thread t = threads.iterator().next();
       t.getName();
@@ -34,6 +28,8 @@ public class SystemTemplateModel extends DashboardTemplateModel {
     long free = rt.freeMemory();
     memUsed = bytesToMB(total - free);
     memTotal = bytesToMB(total);
+
+    this.metrics = metrics;
   }
 
   public void setStartupTime(long startupTime) {

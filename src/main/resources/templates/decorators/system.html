@@ -14,6 +14,11 @@
 
         <div>Startup: <strong><span th:text="${#dates.format(systemModel.startupTime, 'dd-MMM-yyyy HH:mm:ss')}"/></strong></div>
         <div>Mem use: <strong><span th:text="${systemModel.memUsed}"/>M</strong>/<span th:text="${systemModel.memTotal}"/>M, <strong th:text="${systemModel.threads.size()}"/> threads running.</div>
+        <table class="table table-sm system">
+            <tr th:each="entry : *{systemModel.metrics}">
+                <div><span th:text="${entry.key}"/>: <strong th:text="${entry.value}"></strong></div>
+            </tr>
+        </table>
         <div class="table-responsive">
             <table class="table table-sm system">
                 <thead>
@@ -21,6 +26,7 @@
                     <th scope="col"></th>
                     <th scope="col">Thread</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Stacktrace</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,6 +34,11 @@
                     <td class="threadIndex"><span th:text="${iter.index+1}"/></td>
                     <td class="threadName"><span th:text="${thread.getName()}"/></td>
                     <td class="threadState"><span th:text="${thread.getState()}"/></td>
+                    <td class="threadStacktrace">
+                        <div th:each="line : ${thread.getStackTrace()}">
+                            <div th:text="${line.toString()}"/>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
