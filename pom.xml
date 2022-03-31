@@ -7,7 +7,7 @@
 	<name>java-server</name>
 	<properties>
 		<project.scm.id>samourai</project.scm.id>
-		<spring-boot.version>2.1.6.RELEASE</spring-boot.version>
+		<spring-boot.version>2.5.12</spring-boot.version>
 		<spring-security.version>5.1.5.RELEASE</spring-security.version>
 	</properties>
 	<dependencies>
